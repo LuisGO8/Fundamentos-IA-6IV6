@@ -8,7 +8,7 @@ from tkinter import ttk
 class E3:
     def __init__(self):
         self.window=Tk()
-        self.window.title("Boletos")
+        self.window.title("Importe por mes")
         self.window.geometry("400x200")
         self.window.config(bg="#c0ffb0")
 
