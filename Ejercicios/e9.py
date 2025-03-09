@@ -1,5 +1,5 @@
 """
-Suma de los numeros ingresados hasta que el numero sea 0
+Suma de los numeros ingresados hasta que la suma sea mayor a 100
 """
 
 from tkinter import * 
@@ -36,11 +36,11 @@ class E8:
     def calcular(self):
         try:
             numero = int(self.numero.get())
-            if numero == 0:
+            self.suma += numero
+            if self.suma > 100:
                 self.numInput.config(state=DISABLED)
                 self.resultadoLabel.config(text=f"Suma final: {self.suma}", fg="red")
             else:
-                self.suma += numero
                 self.resultadoLabel.config(text=f"Suma {self.suma}")
         except ValueError:
             self.resultadoLabel.config(text="Numero no valido")
