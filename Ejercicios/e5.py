@@ -1,5 +1,5 @@
 """
-Mostrar numeros menores a 10
+Mostrar si el numero esta entre 0 y 20
 """
 
 from tkinter import * 
