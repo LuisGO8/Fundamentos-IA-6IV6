@@ -45,10 +45,12 @@ class E6:
                 self.resultadoLabel.config(text=f"Incorrecto: {numero} fuera del rango", fg="red")
                 self.intentosIncorrectos +=1
                 self.intentosLabel.config(text=f"Cantidad de intentos {self.intentosIncorrectos}")
+                self.numInput.delete(0, END)
         except ValueError:
             if self.numero.get() == "":
                 self.resultadoLabel.config(text="Esperando numero...", fg="black")
             else:
                 self.resultadoLabel.config(text="Número no válido", fg="red")
+                self.numInput.delete(0, END)
 
 app = E6()
