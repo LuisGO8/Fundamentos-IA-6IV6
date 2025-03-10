@@ -5,7 +5,7 @@ Suma de los numeros ingresados hasta que la suma sea mayor a 100
 from tkinter import * 
 from tkinter import ttk
 
-class E8:
+class E9:
     def __init__(self):
         self.window=Tk()
         self.window.title("Suma de numeros")
@@ -45,4 +45,4 @@ class E8:
         except ValueError:
             self.resultadoLabel.config(text="Numero no valido")
             
-app = E8()
+app = E9()
