@@ -17,21 +17,17 @@ class Login:
 
         self.window.geometry(f"{width}x{height}+{x}+{y}")
 
-        # Nombre
         Label(self.window, text="Nombre").pack(pady=5)
         self.usuario = StringVar()
         Entry(self.window, textvariable=self.usuario).pack(pady=5)
 
-        # Contraseña
         Label(self.window, text="Contraseña").pack(pady=5)
         self.password = StringVar()
         Entry(self.window, textvariable=self.password, show="*").pack(pady=5)
 
-        # Alerta
         self.alerta = Label(self.window, text="")
         self.alerta.pack(pady=5)
 
-        # Botón
         Button(self.window, text="Iniciar sesión", command=self.inicioSesion).pack(pady=5)
 
         self.window.mainloop()
@@ -52,7 +48,7 @@ class Consultas:
     def __init__(self):
         self.newWindow = Tk()
         self.newWindow.title("Consultas usando pandas")
-        width = 600
+        width = 1300
         height = 600
 
         screen_width = self.newWindow.winfo_screenwidth()
@@ -65,48 +61,75 @@ class Consultas:
         self.df = pd.read_csv("Sacramentorealestatetransactions.csv")
         print(self.df)
 
-        # Buscar ciudad
-        Label(self.newWindow, text="Buscar ciudad: ").pack(pady=5)
-        self.ciudad = StringVar()
-        Entry(self.newWindow, textvariable=self.ciudad).pack(pady=5)
-        Button(self.newWindow, text="Buscar", command=self.buscarCiudades).pack(pady=5)
 
-        #Boton para buscar para buscar por ciudad = sacramento, menor a 1000
+        Button(self.newWindow, text="Residenciales con 3 camas, menores a 60 000", command=self.consulta1).pack(pady=5)
+        Button(self.newWindow, text="Sacramento, 2 baños, condominio", command=self.consulta2).pack(pady=5)
+        Button(self.newWindow, text="Elk Grove, 4 camas, más de 80 000", command=self.consulta3).pack(pady=5)
+        Button(self.newWindow, text="Casas grandes, más de 2000 sqft", command=self.consulta4).pack(pady=5)
+        Button(self.newWindow, text="Propiedades vendidas en 2008", command=self.consulta5).pack(pady=5)
+        Button(self.newWindow, text="Zip 95838, más de 2 baños", command=self.consulta6).pack(pady=5)
+        Button(self.newWindow, text="Casas en Rancho Cordova", command=self.consulta7).pack(pady=5)
+        Button(self.newWindow, text="Menos de 100 000 y más de 2 camas", command=self.consulta8).pack(pady=5)
+        Button(self.newWindow, text="Departamentos en zip 95670", command=self.consulta9).pack(pady=5)
+        Button(self.newWindow, text="Más de 3 baños y precio superior a 500 000", command=self.consulta10).pack(pady=5)
 
 
-
-
-
-        # Resultados
-        self.resultado = Label(self.newWindow, text="", height=20, width=90)
+        #Resultado
+        self.resultado = Text(self.newWindow, height=20, width=180)
         self.resultado.pack(pady=5)
+
+
+
 
         self.newWindow.mainloop()
 
 
-        #Button(self.newWindow, text="Primeros 5 elementos", command=self.mostrar_head).pack(pady=2)
 
 
 
-
-
-    def buscarCiudades(self):
-        ciudad = self.ciudad.get().strip().upper()  
-        if ciudad:
-            ciudades = self.df[self.df['city'].str.contains(ciudad, na=False)]['city'].unique()
-            resultado = "\n".join(ciudades) if len(ciudades) > 0 else "No se encontraron coincidencias"
-            self.resultado.config(text=resultado)
-        else:
-            self.resultado.config(text="Por favor ingrese una ciudad")
-
-
-"""
-def actualizar_resultado(self, texto):
+    def actualizar_resultado(self, texto):
         self.resultado.delete(1.0, END)
         self.resultado.insert(END, texto)
-    def mostrar_head(self):
-        self.actualizar_resultado(self.df.head().to_string())
-"""
-    
+
+    def consulta1(self):
+        resultado = self.df.query("type == 'Residential' and beds >= 3 and price < 60000")
+        self.actualizar_resultado(resultado.to_string())
+
+    def consulta2(self):
+        resultado = self.df.query("type == 'Condo' and baths >= 2 and city == 'SACRAMENTO'")
+        self.actualizar_resultado(resultado.to_string())
+
+    def consulta3(self):
+        resultado = self.df.query("price > 80000 and beds >= 4 and city == 'ELK GROVE'")
+        self.actualizar_resultado(resultado.to_string())
+
+    def consulta4(self):
+        resultado = self.df.query("sq__ft > 2000")
+        self.actualizar_resultado(resultado.to_string())
+
+    def consulta5(self):
+        resultado = self.df[self.df['sale_date'].str.contains("2008")] 
+        self.actualizar_resultado(resultado.to_string())
+
+    def consulta6(self):
+        resultado = self.df.query("zip == 95838 and baths > 2")
+        self.actualizar_resultado(resultado.to_string())
+
+    def consulta7(self):
+        resultado = self.df.query("city == 'RANCHO CORDOVA'")
+        self.actualizar_resultado(resultado.to_string())
+
+    def consulta8(self):
+        resultado = self.df.query("price < 100000 and beds > 2")
+        self.actualizar_resultado(resultado.to_string())
+
+    def consulta9(self):
+        resultado = self.df.query("zip == 95670 and type == 'Condo'")
+        self.actualizar_resultado(resultado.to_string())
+
+    def consulta10(self):
+        resultado = self.df.query("baths > 3 and price > 500000")
+        self.actualizar_resultado(resultado.to_string())
+
 
 app = Login()
