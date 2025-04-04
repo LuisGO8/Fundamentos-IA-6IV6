@@ -9,28 +9,46 @@ class main:
     def __init__(self):
         self.window = Tk()
         self.window.title("Grafica de una pendiente")
-        self.window.geometry("400x300")
+        
+        #Estilos
+        bgColor = "#2e3535"
+        fontStyle = ("Helvetica Neue", 12)
+        txtColor = "#f1f5f5"
+        entry = "#b8fcba"
+        fontStyleEntry = ("Montserrat", 10)
+        width = 300
+        height = 260
+        screen_width = self.window.winfo_screenwidth()
+        screen_height = self.window.winfo_screenheight()
+        x = (screen_width - width) // 2
+        y = (screen_height - height) // 2
+        self.window.geometry(f"{width}x{height}+{x}+{y}")
+        self.window.configure(bg=bgColor)
+
+        
+
+
 
         #Variable en X
-        Label(self.window, text="Valor en x").pack(pady=5)
+        Label(self.window, text="Valor en x", font=fontStyle, bg=bgColor, fg=txtColor).pack(pady=5)
         self.x = StringVar()
-        Entry(self.window, textvariable=self.x).pack(pady=5)
+        Entry(self.window, textvariable=self.x, bg=entry, font=fontStyleEntry).pack(pady=5)
 
         #Variable en Y
-        Label(self.window, text="Valor en Y").pack(pady=5)
+        Label(self.window, text="Valor en Y", font=fontStyle, bg=bgColor, fg=txtColor).pack(pady=5)
         self.y = StringVar()
-        Entry(self.window, textvariable=self.y).pack(pady=5)
+        Entry(self.window, textvariable=self.y, bg=entry, font=fontStyleEntry).pack(pady=5)
         
         #Pendiente
-        Label(self.window, text="Valor de la pendiente").pack(pady=5)
+        Label(self.window, text="Valor de la pendiente", font=fontStyle, bg=bgColor, fg=txtColor).pack(pady=5)
         self.b = StringVar()
-        Entry(self.window, textvariable=self.b).pack(pady=5)
+        Entry(self.window, textvariable=self.b, bg=entry, font=fontStyleEntry).pack(pady=5)
 
         #Bóton para graficar
-        Button(self.window, text="Graficar", command=self.graficar).pack(pady=5)
+        Button(self.window, text="Graficar", command=self.graficar, font=fontStyle, bg=bgColor, fg=txtColor).pack(pady=5)
 
         #Alerta para errores
-        self.alerta = Label(self.window, text="")
+        self.alerta = Label(self.window, text="", font=fontStyle, bg=bgColor)
         self.alerta.pack(pady=5)
 
 
@@ -64,7 +82,7 @@ class main:
             plt.show()
 
         except ValueError:
-            self.alerta.config(text="Por favor ingrese valores correctos", fg="red")
+            self.alerta.config(text="Por favor ingrese valores correctos", fg="white")
 
 
 app = main() 
