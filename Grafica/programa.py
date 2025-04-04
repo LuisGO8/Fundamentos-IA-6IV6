@@ -40,7 +40,7 @@ class main:
         Entry(self.window, textvariable=self.y, bg=entry, font=fontStyleEntry).pack(pady=5)
         
         #Pendiente
-        Label(self.window, text="Valor de la pendiente", font=fontStyle, bg=bgColor, fg=txtColor).pack(pady=5)
+        Label(self.window, text="Valor de la constante", font=fontStyle, bg=bgColor, fg=txtColor).pack(pady=5)
         self.b = StringVar()
         Entry(self.window, textvariable=self.b, bg=entry, font=fontStyleEntry).pack(pady=5)
 
